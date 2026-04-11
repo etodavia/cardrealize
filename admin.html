@@ -130,21 +130,21 @@
                         <div class="card">
                             <div class="section-title">Logo e Cabeçalho</div>
                             <div class="form-grid">
-                                <div class="form-group"><label>URL da Logo</label><input type="text" id="hdr-logo"><input type="file" onchange="uploadFile(this, 'hdr-logo')" style="font-size:0.7rem; margin-top:5px;"></div>
-                                <div class="form-group"><label>QR Code Topo</label><input type="text" id="hdr-qrTop"><input type="file" onchange="uploadFile(this, 'hdr-qrTop')" style="font-size:0.7rem; margin-top:5px;"></div>
+                                 <div class="form-group"><label>URL da Logo</label><input type="text" id="hdr-logo"><input type="file" onchange="uploadFile(this, 'hdr-logo')" style="font-size:0.7rem; margin-top:5px;"><small id="status-hdr-logo" style="display:none;"></small></div>
+                                 <div class="form-group"><label>QR Code Topo</label><input type="text" id="hdr-qrTop"><input type="file" onchange="uploadFile(this, 'hdr-qrTop')" style="font-size:0.7rem; margin-top:5px;"><small id="status-hdr-qrTop" style="display:none;"></small></div>
                                 <div class="form-group" style="grid-column: span 1;"><label>Slogan (Tagline)</label><textarea id="hdr-tagline" rows="2"></textarea></div>
                             </div>
                         </div>
                         <div class="card">
                             <div class="section-title">Cores e Fundo</div>
                             <div class="form-grid">
-                                <div class="form-group"><label>Cor do Fundo</label><input type="color" id="bg-color"></div>
-                                <div class="form-group"><label>Imagem Mobile</label><input type="text" id="bg-mobile"></div>
-                                <div class="form-group"><label>Imagem Tablet</label><input type="text" id="bg-tablet"></div>
-                                <div class="form-group"><label>Imagem Desktop</label><input type="text" id="bg-desktop"></div>
-                            </div>
-                        </div>
-                    </div>
+                                 <div class="form-group"><label>Cor do Fundo</label><input type="color" id="bg-color"></div>
+                                 <div class="form-group"><label>Imagem Mobile</label><input type="text" id="bg-mobile"><input type="file" onchange="uploadFile(this, 'bg-mobile')" style="font-size:0.7rem; margin-top:5px;"><small id="status-bg-mobile" style="display:none;"></small></div>
+                                 <div class="form-group"><label>Imagem Tablet</label><input type="text" id="bg-tablet"><input type="file" onchange="uploadFile(this, 'bg-tablet')" style="font-size:0.7rem; margin-top:5px;"><small id="status-bg-tablet" style="display:none;"></small></div>
+                                 <div class="form-group"><label>Imagem Desktop</label><input type="text" id="bg-desktop"><input type="file" onchange="uploadFile(this, 'bg-desktop')" style="font-size:0.7rem; margin-top:5px;"><small id="status-bg-desktop" style="display:none;"></small></div>
+                             </div>
+                         </div>
+                     </div>
 
                     <!-- TAB: Perfil -->
                     <div class="tab-content" id="tab-profile" style="display:none;">
@@ -188,8 +188,27 @@
                     </div>
 
                     <!-- Outras TABs mantidas ... -->
-                    <div class="tab-content" id="tab-address" style="display:none;">
-                        <div class="card"><div class="section-title">Endereço</div><div class="form-group"><label>Título</label><input type="text" id="addr-title"></div><div class="form-group"><label>Linhas</label><textarea id="addr-lines" rows="3"></textarea></div></div>
+                     <div class="tab-content" id="tab-address" style="display:none;">
+                        <div class="card">
+                            <div class="section-title">Endereço</div>
+                            <div class="form-grid">
+                                <div class="form-group"><label>Título</label><input type="text" id="addr-title"></div>
+                                <div class="form-group"><label>Linhas</label><textarea id="addr-lines" rows="3"></textarea></div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="section-title">Avaliações (Google/QR)</div>
+                            <div class="form-grid">
+                                <div class="form-group"><label>Título Avaliação</label><input type="text" id="rev-title"></div>
+                                <div class="form-group"><label>Subtexto</label><textarea id="rev-subtext" rows="2"></textarea></div>
+                                <div class="form-group" style="grid-column: span 2;">
+                                    <label>QR Code de Avaliação</label>
+                                    <input type="text" id="rev-qr">
+                                    <input type="file" onchange="uploadFile(this, 'rev-qr')" style="font-size:0.7rem; margin-top:5px;">
+                                    <small id="status-rev-qr" style="display:none;"></small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="tab-content" id="tab-products" style="display:none;">
