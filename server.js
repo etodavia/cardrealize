@@ -93,9 +93,82 @@ app.post('/api/card', async (req, res) => {
     }
 });
 
+// Helper function to get data for SSR
+async function getCardDataInternal() {
+    try {
+        if (useSQLite) {
+            const row = await new Promise((resolve, reject) => {
+                dbSQLite.get('SELECT data FROM cards WHERE id = ?', ['main'], (err, row) => {
+                    if (err) reject(err);
+                    else resolve(row);
+                });
+            });
+            if (row) return JSON.parse(row.data);
+        }
+        if (fs.existsSync(DATA_FILE)) {
+            const dataJSON = fs.readFileSync(DATA_FILE, 'utf-8');
+            return JSON.parse(dataJSON);
+        }
+    } catch (e) {
+        console.error("Erro ao ler dados para SEO:", e);
+    }
+    return null;
+}
+
+// Special route for root to inject SEO tags (SSR Lite)
+app.get('/', async (req, res) => {
+    try {
+        const data = await getCardDataInternal();
+        let htmlPath = path.join(__dirname, 'dist', 'index.html');
+        
+        // Fallback for local development if dist doesn't exist
+        if (!fs.existsSync(htmlPath)) {
+            htmlPath = path.join(__dirname, 'index.html');
+        }
+
+        if (!fs.existsSync(htmlPath)) {
+            return res.status(404).send("Index não encontrado");
+        }
+
+        let html = fs.readFileSync(htmlPath, 'utf8');
+
+        if (data && data.seo) {
+            const title = data.seo.title || 'Cartão Digital';
+            const desc = data.seo.description || 'Conheça nossos serviços';
+            const logo = (data.header && data.header.logoUrl) ? data.header.logoUrl : '';
+            
+            // Regex to replace tags for link previews
+            html = html.replace(/<title[^>]*>([\s\S]*?)<\/title>/i, `<title>${title}</title>`);
+            html = html.replace(/<meta property="og:title"[^>]*content="[^"]*"[^>]*>/gi, `<meta property="og:title" content="${title}" />`);
+            html = html.replace(/<meta name="description"[^>]*content="[^"]*"[^>]*>/gi, `<meta name="description" content="${desc}" />`);
+            html = html.replace(/<meta property="og:description"[^>]*content="[^"]*"[^>]*>/gi, `<meta property="og:description" content="${desc}" />`);
+
+            // Inject Favicon if logo exists
+            if (logo) {
+                const faviconTag = `<link rel="icon" type="image/png" href="${logo}" />`;
+                if (html.includes('</head>')) {
+                    html = html.replace('</head>', `${faviconTag}\n</head>`);
+                }
+            }
+        }
+
+        res.send(html);
+    } catch (e) {
+        console.error("Erro SSR:", e);
+        res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    }
+});
+
 // Handle SPA routing: send all other requests to index.html
-app.get('*path', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+app.get('*all', (req, res) => {
+    // If it's a request for a static file that wasn't found by express.static, 
+    // or a sub-route, send index.html
+    const distPath = path.join(__dirname, 'dist', 'index.html');
+    if (fs.existsSync(distPath)) {
+        res.sendFile(distPath);
+    } else {
+        res.sendFile(path.join(__dirname, 'index.html'));
+    }
 });
 
 

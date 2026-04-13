@@ -56,15 +56,29 @@ function applyResponsiveBackground(bgs) {
 
 function populateUI(data) {
     // Header
-    if (data.header.logoUrl) {
-        const logoImg = document.getElementById('hdr-logo-img');
-        logoImg.src = data.header.logoUrl;
-        logoImg.style.display = 'block';
-        document.getElementById('hdr-logo-text-block').style.display = 'none';
-    } else if (data.header.tagline) {
-        const parts = data.header.tagline.split('\n');
-        document.getElementById('hdr-logo-text-main').textContent = parts[0] || 'FINANCE LOGO';
-        document.getElementById('hdr-tagline').textContent = parts.slice(1).join(' ') || 'TAGLINE GOES HERE';
+    if (data.header) {
+        if (data.header.logoUrl) {
+            const logoImg = document.getElementById('hdr-logo-img');
+            const logoText = document.getElementById('hdr-logo-text-block');
+            if (logoImg) {
+                logoImg.src = data.header.logoUrl;
+                logoImg.style.display = 'block';
+                if (logoText) logoText.style.display = 'none';
+
+                // Set Favicon
+                let link = document.querySelector("link[rel~='icon']");
+                if (!link) {
+                    link = document.createElement('link');
+                    link.rel = 'icon';
+                    document.getElementsByTagName('head')[0].appendChild(link);
+                }
+                link.href = data.header.logoUrl;
+            }
+        } else if (data.header.tagline) {
+            const parts = data.header.tagline.split('\n');
+            document.getElementById('hdr-logo-text-main').textContent = parts[0] || 'FINANCE LOGO';
+            document.getElementById('hdr-tagline').textContent = parts.slice(1).join(' ') || 'TAGLINE GOES HERE';
+        }
     }
 
     document.getElementById('hdr-topQr').src = data.header.topQrCodeUrl;

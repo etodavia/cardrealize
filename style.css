@@ -677,13 +677,13 @@ body {
   }
 
   .photo-column {
-    flex: 1;
+    flex: 0.6; /* Reduced to give more space to content */
     height: 100%;
     margin-top: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center; /* Center horizontally in the left half */
+    align-items: center; 
   }
 
   .top-qr-block {
@@ -711,11 +711,11 @@ body {
   }
 
   .content-column {
-    flex: 1;
+    flex: 1.4; /* Increased to allow wider elements */
     justify-content: flex-start;
     gap: 2vh;
     height: 100%;
-    padding: 1.5vh 1vw;
+    padding: 1.5vh 0;
     max-width: none;
   }
 
@@ -724,13 +724,18 @@ body {
   }
 
   .links-column {
-    flex: 2;
+    flex: 2.2; /* Better balance for wider links */
     justify-content: space-between;
     gap: 0;
   }
 
+  .link-pill {
+    height: 4.8vh; /* Slightly thinner as requested */
+    min-height: 40px;
+  }
+
   .address-column {
-    flex: 3;
+    flex: 2.8; /* Wider transparent box */
     padding: 2.5vh 2vw;
     border-radius: 20px;
   }
