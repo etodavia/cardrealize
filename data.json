@@ -2,44 +2,44 @@
   "id": "main",
   "header": {
     "logoUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1775844559673_n2dgzd.png?alt=media&token=1eaab6d0-2f3d-4e9c-8d19-5f7f86748ad0",
-    "tagline": "loth.\nESTRATÉGIA E RESULTADO",
+    "tagline": "",
     "topQrCodeUrl": "/assets/qr-top.png"
   },
   "backgrounds": {
-    "mobileUrl": "/assets/bg-mobile.png",
-    "tabletUrl": "/assets/bg-tablet.png",
-    "desktopUrl": "/assets/bg-desktop.png",
-    "backgroundColor": "#1743d3"
+    "mobileUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776100159401_fundocel.png?alt=media&token=2fa3d552-d4ca-4f2e-b15c-fcf5b81e6884",
+    "tabletUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776100151633_fundotab.png?alt=media&token=41dd15c4-a8bc-4a36-9b58-f5ca4326b5e9",
+    "desktopUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776100164510_fundodesk.png?alt=media&token=b2b89d61-65ec-4d3e-9ce2-a4093d354c38",
+    "backgroundColor": "#1f1f27"
   },
   "profile": {
-    "name": "Lorena Dantas",
-    "title": "marketing & assessoria",
-    "whatsappNumber": "00999999999",
-    "whatsappText": "AGENDE UMA REUNIÃO\n(00) 99999-9999"
+    "name": "Benhur Araújo",
+    "title": "Representante Comercial",
+    "whatsappNumber": "5521990600336",
+    "whatsappText": "        AGENDE UMA REUNIÃO\n             (21) 99060-0336"
   },
   "links": [
     {
-      "displayText": "www.seuswebsite.com.br",
-      "icon": "globe",
-      "customColor": "#ff6600",
-      "url": "#"
+      "displayText": "benhur.araujo@hotmail.com",
+      "icon": "email",
+      "customColor": "#0a4899",
+      "url": "mailto: benhur.araujo@hotmail.com"
     },
     {
-      "displayText": "@seuperfilnoinstagram",
-      "icon": "",
-      "customColor": "#000000",
-      "url": "#"
+      "displayText": "@benasosolucoesemequipamentos",
+      "icon": "instagram",
+      "customColor": "#dc0445",
+      "url": "https://www.instagram.com/benasosolucoesemequipamentos"
     },
     {
-      "displayText": "@seuperfilnofacebook",
-      "icon": "",
-      "customColor": "#000000",
-      "url": "#"
+      "displayText": "@benhuraraujodesouzacavalcante",
+      "icon": "linkedin",
+      "customColor": "#1b9dee",
+      "url": "https://www.linkedin.com/mwlite/profile/in/benhur-araujo-de-sousa-cavalcante-80823830?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
     }
   ],
   "addressBlock": {
-    "title": "Entre Aspas",
-    "lines": "Rua : Beka alameda de s/a 235 - filixa\nCEP 14254785\nCidade - Estado - Brasil",
+    "title": "O que oferecemos",
+    "lines": "Equipamentos, mobiliário e soluções profissionais\ncom qualidade, durabilidade e alto desempenho.",
     "phrase": "Frase de Destaque Personalizada"
   },
   "reviewBlock": {
@@ -51,23 +51,23 @@
     "sectionTitle": "Serviços da Agência",
     "items": [
       {
-        "title": "Serviço de finanças",
-        "imgUrl": "/assets/prod1.png",
-        "pdfUrl": ""
+        "title": "Cozinhas Industriais",
+        "imgUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109253168_2148763122.jpg?alt=media&token=e6a18bb4-d3c0-40cd-8730-ff2aa2b1ac9f",
+        "pdfUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109470270_2024-%20SUPERMERCADOS%20-%20LENOX%20COZINHAS.pdf?alt=media&token=ffa69b05-4fa4-471d-a58c-219c99628001"
       },
       {
-        "title": "Serviço de finanças",
-        "imgUrl": "/assets/prod2.png",
-        "pdfUrl": ""
+        "title": "Equipamentos Food Service",
+        "imgUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109481892_2148237244.jpg?alt=media&token=bdc20b16-af57-4147-84ef-c42f1c804cea",
+        "pdfUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109492475_CATALOGO%20QUALIS%202025-2026.pdf?alt=media&token=2ce392d9-6861-423d-b75c-0b0afcdc3d7e"
       },
       {
-        "title": "Serviço de finanças",
-        "imgUrl": "/assets/prod3.png",
-        "pdfUrl": ""
+        "title": "Linha Hamburgueria",
+        "imgUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109504402_2148006675.jpg?alt=media&token=27422581-ffea-4c7c-a0ae-0c51d89fffd2",
+        "pdfUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109522374_Cata%CC%81logo%20-%20Linha%20Cafeteria%202026.pdf?alt=media&token=7eb4e0d7-57f9-4116-a991-f24c82ae4cdc"
       },
       {
-        "title": "Atividade Teste",
-        "imgUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1775850567025_photo-1552664730-d307ca884978.avif?alt=media&token=c3a74a5c-7be8-45c5-b17e-906a43980ec9",
+        "title": "Mobiliário Comercial",
+        "imgUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776110852186_27842.jpg?alt=media&token=084cda0f-edc1-4574-889e-d3f2f14ffb7a",
         "pdfUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1775850583304_manual.pdf?alt=media&token=77d7429a-09e4-43b0-8d63-f0bcf1cbf9ef"
       }
     ]
@@ -76,13 +76,15 @@
     "text": "App elaborado por Loth Digital\nTodos os direitos reservados @2026"
   },
   "seo": {
-    "title": "Loth Digital - Lorena Dantas",
-    "description": "Acesse nosso cartão digital e conheça nossos serviços."
+    "title": "Benhur Araújo ",
+    "description": "Equipamentos, mobiliário e soluções profissionais\ncom qualidade, durabilidade e alto desempenho.\n"
   },
   "tracking": {
     "fbPixel": "",
     "gtmHead": "",
-    "gtmBody": ""
+    "gtmBody": "",
+    "pinterest": "",
+    "linkedin": ""
   },
   "adminEmail": "loth.mktdigital@gmail.com",
   "adminPassword": "Lmktd.242509*",

@@ -83,6 +83,7 @@ function populateUI(data) {
     linksContainer.innerHTML = '';
     if (data.links) {
         data.links.forEach(link => {
+            if (!link.displayText && !link.url) return; // Skip empty links
             const el = document.createElement('a');
             el.className = `link-pill gsap-link`;
             el.href = link.url;
@@ -103,7 +104,10 @@ function populateUI(data) {
                 'pinterest': { icon: 'fab fa-pinterest', bg: 'bg-pinterest' },
                 'x-twitter': { icon: 'fab fa-x-twitter', bg: 'bg-x-twitter' },
                 'linkedin': { icon: 'fab fa-linkedin-in', bg: 'bg-linkedin' },
-                'reddit': { icon: 'fab fa-reddit-alien', bg: 'bg-reddit' }
+                'reddit': { icon: 'fab fa-reddit-alien', bg: 'bg-reddit' },
+                'google': { icon: 'fab fa-google', bg: 'bg-google' },
+                'spotify': { icon: 'fab fa-spotify', bg: 'bg-spotify' },
+                'email': { icon: 'fas fa-envelope', bg: 'bg-email' }
             };
 
             if (iconMap[iconKey]) {
@@ -274,6 +278,18 @@ function applySEOAndTracking(data) {
                 const fragment = document.createRange().createContextualFragment(data.tracking.gtmBody);
                 gtmBodyContainer.appendChild(fragment);
             }
+        }
+
+        // Pinterest Tag
+        if (data.tracking.pinterest && data.tracking.pinterest.trim() !== '') {
+            const fragment = document.createRange().createContextualFragment(data.tracking.pinterest);
+            document.head.appendChild(fragment);
+        }
+
+        // LinkedIn Tag
+        if (data.tracking.linkedin && data.tracking.linkedin.trim() !== '') {
+            const fragment = document.createRange().createContextualFragment(data.tracking.linkedin);
+            document.head.appendChild(fragment);
         }
     }
 }

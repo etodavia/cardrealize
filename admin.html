@@ -167,19 +167,58 @@
                             <div id="links-blocks-container">
                                 <div class="link-block"><div class="form-grid">
                                     <div class="form-group"><label>Botão 1 - Texto</label><input type="text" id="link-1-text"></div>
-                                    <div class="form-group"><label>Ícone</label><select id="link-1-icon"><option value="globe">Site</option><option value="instagram">Instagram</option><option value="facebook">Facebook</option><option value="youtube">YouTube</option><option value="tiktok">TikTok</option></select></div>
+                                    <div class="form-group"><label>Ícone</label><select id="link-1-icon">
+                                        <option value="globe">Site (Globo)</option>
+                                        <option value="instagram">Instagram</option>
+                                        <option value="facebook">Facebook</option>
+                                        <option value="linkedin">LinkedIn</option>
+                                        <option value="google">Google (GMB)</option>
+                                        <option value="x-twitter">X (Twitter)</option>
+                                        <option value="tiktok">TikTok</option>
+                                        <option value="pinterest">Pinterest</option>
+                                        <option value="reddit">Reddit</option>
+                                        <option value="youtube">YouTube</option>
+                                        <option value="spotify">Spotify</option>
+                                        <option value="email">E-mail</option>
+                                    </select></div>
                                     <div class="form-group"><label>Cor</label><input type="color" id="link-1-color"></div>
                                     <div class="form-group"><label>URL</label><input type="text" id="link-1-url"></div>
                                 </div></div>
                                 <div class="link-block"><div class="form-grid">
                                     <div class="form-group"><label>Botão 2 - Texto</label><input type="text" id="link-2-text"></div>
-                                    <div class="form-group"><label>Ícone</label><select id="link-2-icon"><option value="globe">Site</option><option value="instagram">Instagram</option><option value="facebook">Facebook</option></select></div>
+                                    <div class="form-group"><label>Ícone</label><select id="link-2-icon">
+                                        <option value="globe">Site (Globo)</option>
+                                        <option value="instagram">Instagram</option>
+                                        <option value="facebook">Facebook</option>
+                                        <option value="linkedin">LinkedIn</option>
+                                        <option value="google">Google (GMB)</option>
+                                        <option value="x-twitter">X (Twitter)</option>
+                                        <option value="tiktok">TikTok</option>
+                                        <option value="pinterest">Pinterest</option>
+                                        <option value="reddit">Reddit</option>
+                                        <option value="youtube">YouTube</option>
+                                        <option value="spotify">Spotify</option>
+                                        <option value="email">E-mail</option>
+                                    </select></div>
                                     <div class="form-group"><label>Cor</label><input type="color" id="link-2-color"></div>
                                     <div class="form-group"><label>URL</label><input type="text" id="link-2-url"></div>
                                 </div></div>
                                 <div class="link-block"><div class="form-grid">
                                     <div class="form-group"><label>Botão 3 - Texto</label><input type="text" id="link-3-text"></div>
-                                    <div class="form-group"><label>Ícone</label><select id="link-3-icon"><option value="globe">Site</option><option value="instagram">Instagram</option></select></div>
+                                    <div class="form-group"><label>Ícone</label><select id="link-3-icon">
+                                        <option value="globe">Site (Globo)</option>
+                                        <option value="instagram">Instagram</option>
+                                        <option value="facebook">Facebook</option>
+                                        <option value="linkedin">LinkedIn</option>
+                                        <option value="google">Google (GMB)</option>
+                                        <option value="x-twitter">X (Twitter)</option>
+                                        <option value="tiktok">TikTok</option>
+                                        <option value="pinterest">Pinterest</option>
+                                        <option value="reddit">Reddit</option>
+                                        <option value="youtube">YouTube</option>
+                                        <option value="spotify">Spotify</option>
+                                        <option value="email">E-mail</option>
+                                    </select></div>
                                     <div class="form-group"><label>Cor</label><input type="color" id="link-3-color"></div>
                                     <div class="form-group"><label>URL</label><input type="text" id="link-3-url"></div>
                                 </div></div>
@@ -220,7 +259,23 @@
                     </div>
 
                     <div class="tab-content" id="tab-seo" style="display:none;">
-                        <div class="card"><div class="section-title">SEO e Pixel</div><div class="form-grid"><div><label>SEO Title</label><input type="text" id="seo-title"></div><div><label>SEO Desc</label><textarea id="seo-desc"></textarea></div><div><label>Pixel</label><input type="text" id="tracking-fb-pixel"></div></div></div>
+                        <div class="card">
+                            <div class="section-title">SEO & Indexação</div>
+                            <div class="form-grid">
+                                <div class="form-group"><label>Título da Aba (SEO Title)</label><input type="text" id="seo-title"></div>
+                                <div class="form-group"><label>Descrição (Meta Description)</label><textarea id="seo-desc" rows="2"></textarea></div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="section-title">Rastreamento (Pixel & GTM)</div>
+                            <div class="form-grid">
+                                <div class="form-group"><label>Meta Pixel (Facebook)</label><input type="text" id="tracking-fb-pixel" placeholder="ID ou Código"></div>
+                                <div class="form-group"><label>Pinterest Tag</label><textarea id="tracking-pinterest" rows="2" placeholder="Cole o código aqui"></textarea></div>
+                                <div class="form-group"><label>LinkedIn Insight Tag</label><textarea id="tracking-linkedin" rows="2" placeholder="Cole o código aqui"></textarea></div>
+                                <div class="form-group" style="grid-column: span 2;"><label>Google Tag Manager / Analytics (HEAD)</label><textarea id="tracking-gtm-head" rows="3" placeholder="Cole o código para o <head>"></textarea></div>
+                                <div class="form-group" style="grid-column: span 2;"><label>Google Tag Manager / Analytics (BODY)</label><textarea id="tracking-gtm-body" rows="3" placeholder="Cole o código para o <body>"></textarea></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="tab-content" id="tab-security" style="display:none;">

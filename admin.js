@@ -97,6 +97,8 @@ async function loadData() {
         setVal('tracking-fb-pixel', data.tracking?.fbPixel);
         setVal('tracking-gtm-head', data.tracking?.gtmHead);
         setVal('tracking-gtm-body', data.tracking?.gtmBody);
+        setVal('tracking-pinterest', data.tracking?.pinterest);
+        setVal('tracking-linkedin', data.tracking?.linkedin);
         setVal('sec-email', data.adminEmail);
         setVal('sec-password', data.adminPassword);
         setVal('sec-recovery-key', data.securityKey);
@@ -151,7 +153,13 @@ async function saveData() {
     _fullData.reviewBlock.qrCodeUrl = getVal('rev-qr');
 
     _fullData.seo = { title: getVal('seo-title'), description: getVal('seo-desc') };
-    _fullData.tracking = { fbPixel: getVal('tracking-fb-pixel'), gtmHead: getVal('tracking-gtm-head'), gtmBody: getVal('tracking-gtm-body') };
+    _fullData.tracking = { 
+        fbPixel: getVal('tracking-fb-pixel'), 
+        gtmHead: getVal('tracking-gtm-head'), 
+        gtmBody: getVal('tracking-gtm-body'),
+        pinterest: getVal('tracking-pinterest'),
+        linkedin: getVal('tracking-linkedin')
+    };
     _fullData.adminEmail = getVal('sec-email');
     _fullData.adminPassword = getVal('sec-password');
     _fullData.securityKey = getVal('sec-recovery-key');

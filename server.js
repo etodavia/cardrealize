@@ -99,7 +99,21 @@ app.get('*path', (req, res) => {
 });
 
 
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Servidor rodando em http://0.0.0.0:${PORT}`);
-});
+try {
+    const server = app.listen(PORT, () => {
+        console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+    });
+
+    server.on('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+            console.error(`❌ Erro: A porta ${PORT} já está sendo usada por outro programa.`);
+        } else {
+            console.error('❌ Erro no servidor:', err);
+        }
+        process.exit(1);
+    });
+} catch (e) {
+    console.error('❌ Não foi possível iniciar o servidor:', e);
+    process.exit(1);
+}
 
