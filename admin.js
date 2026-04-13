@@ -94,6 +94,7 @@ async function loadData() {
 
         setVal('seo-title', data.seo?.title);
         setVal('seo-desc', data.seo?.description);
+        setVal('seo-image', data.seo?.image);
         setVal('tracking-fb-pixel', data.tracking?.fbPixel);
         setVal('tracking-gtm-head', data.tracking?.gtmHead);
         setVal('tracking-gtm-body', data.tracking?.gtmBody);
@@ -152,7 +153,11 @@ async function saveData() {
     _fullData.reviewBlock.subtext = getVal('rev-subtext');
     _fullData.reviewBlock.qrCodeUrl = getVal('rev-qr');
 
-    _fullData.seo = { title: getVal('seo-title'), description: getVal('seo-desc') };
+    _fullData.seo = { 
+        title: getVal('seo-title'), 
+        description: getVal('seo-desc'),
+        image: getVal('seo-image')
+    };
     _fullData.tracking = { 
         fbPixel: getVal('tracking-fb-pixel'), 
         gtmHead: getVal('tracking-gtm-head'), 

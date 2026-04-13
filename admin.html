@@ -264,6 +264,12 @@
                             <div class="form-grid">
                                 <div class="form-group"><label>Título da Aba (SEO Title)</label><input type="text" id="seo-title"></div>
                                 <div class="form-group"><label>Descrição (Meta Description)</label><textarea id="seo-desc" rows="2"></textarea></div>
+                                <div class="form-group" style="grid-column: span 2;">
+                                    <label>Imagem de Compartilhamento (WhatsApp/Redes Sociais)</label>
+                                    <input type="text" id="seo-image" placeholder="URL da imagem ou faça upload">
+                                    <input type="file" onchange="uploadFile(this, 'seo-image')" style="font-size:0.7rem; margin-top:5px;">
+                                    <small id="status-seo-image" style="display:none;"></small>
+                                </div>
                             </div>
                         </div>
                         <div class="card">

@@ -135,6 +135,7 @@ app.get('/', async (req, res) => {
         if (data && data.seo) {
             const title = data.seo.title || 'Cartão Digital';
             const desc = data.seo.description || 'Conheça nossos serviços';
+            const imageUrl = data.seo.image || '';
             const logo = (data.header && data.header.logoUrl) ? data.header.logoUrl : '';
             
             // Regex to replace tags for link previews
@@ -142,6 +143,11 @@ app.get('/', async (req, res) => {
             html = html.replace(/<meta property="og:title"[^>]*content="[^"]*"[^>]*>/gi, `<meta property="og:title" content="${title}" />`);
             html = html.replace(/<meta name="description"[^>]*content="[^"]*"[^>]*>/gi, `<meta name="description" content="${desc}" />`);
             html = html.replace(/<meta property="og:description"[^>]*content="[^"]*"[^>]*>/gi, `<meta property="og:description" content="${desc}" />`);
+
+            // Replace og:image if provided
+            if (imageUrl) {
+                html = html.replace(/<meta property="og:image"[^>]*content="[^"]*"[^>]*>/gi, `<meta property="og:image" content="${imageUrl}" />`);
+            }
 
             // Inject Favicon if logo exists
             if (logo) {
