@@ -138,23 +138,37 @@ app.get('/', async (req, res) => {
             const imageUrl = data.seo.image || '';
             const logo = (data.header && data.header.logoUrl) ? data.header.logoUrl : '';
             
-            // Regex to replace tags for link previews
-            html = html.replace(/<title[^>]*>([\s\S]*?)<\/title>/i, `<title>${title}</title>`);
-            html = html.replace(/<meta property="og:title"[^>]*content="[^"]*"[^>]*>/gi, `<meta property="og:title" content="${title}" />`);
-            html = html.replace(/<meta name="description"[^>]*content="[^"]*"[^>]*>/gi, `<meta name="description" content="${desc}" />`);
-            html = html.replace(/<meta property="og:description"[^>]*content="[^"]*"[^>]*>/gi, `<meta property="og:description" content="${desc}" />`);
+            // 1. Remove existing title and meta tags to avoid duplication
+            html = html.replace(/<title[^>]*>[\s\S]*?<\/title>/gi, '');
+            html = html.replace(/<meta[^>]*name=["']description["'][^>]*>/gi, '');
+            html = html.replace(/<meta[^>]*property=["']og:title["'][^>]*>/gi, '');
+            html = html.replace(/<meta[^>]*property=["']og:description["'][^>]*>/gi, '');
+            html = html.replace(/<meta[^>]*property=["']og:image["'][^>]*>/gi, '');
+            html = html.replace(/<meta[^>]*property=["']og:type["'][^>]*>/gi, '');
 
-            // Replace og:image if provided
+            // 2. Prepare new SEO tags
+            let seoTags = `
+    <title>${title}</title>
+    <meta name="description" content="${desc}">
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${desc}" />
+    <meta property="og:type" content="website" />
+`;
             if (imageUrl) {
-                html = html.replace(/<meta property="og:image"[^>]*content="[^"]*"[^>]*>/gi, `<meta property="og:image" content="${imageUrl}" />`);
+                seoTags += `    <meta property="og:image" content="${imageUrl}" />\n`;
+                seoTags += `    <meta name="twitter:image" content="${imageUrl}" />\n`;
+            }
+            if (logo) {
+                seoTags += `    <link rel="icon" type="image/png" href="${logo}" />\n`;
+                // If no SEO image, use logo as fallback for OG
+                if (!imageUrl) {
+                    seoTags += `    <meta property="og:image" content="${logo}" />\n`;
+                }
             }
 
-            // Inject Favicon if logo exists
-            if (logo) {
-                const faviconTag = `<link rel="icon" type="image/png" href="${logo}" />`;
-                if (html.includes('</head>')) {
-                    html = html.replace('</head>', `${faviconTag}\n</head>`);
-                }
+            // 3. Inject right after <head> or at the beginning of Head
+            if (html.includes('<head>')) {
+                html = html.replace('<head>', `<head>\n${seoTags}`);
             }
         }
 
