@@ -171,14 +171,18 @@ app.get('/', async (req, res) => {
 `;
             
             // Final fallback image if everything is empty
-            const finalImage = imageUrl || logo;
+            let finalImage = imageUrl || logo;
 
             if (finalImage) {
-                seoTags += `    <meta property="og:image" content="${finalImage}" />\n`;
-                seoTags += `    <meta property="og:image:secure_url" content="${finalImage}" />\n`;
+                // Add a cache-buster timestamp to force update
+                const cacheBuster = `?t=${Date.now()}`;
+                const finalImageWithBuster = finalImage.includes('?') ? (finalImage + '&' + cacheBuster.substring(1)) : (finalImage + cacheBuster);
+
+                seoTags += `    <meta property="og:image" content="${finalImageWithBuster}" />\n`;
+                seoTags += `    <meta property="og:image:secure_url" content="${finalImageWithBuster}" />\n`;
                 seoTags += `    <meta property="og:image:width" content="1200" />\n`;
                 seoTags += `    <meta property="og:image:height" content="630" />\n`;
-                seoTags += `    <meta name="twitter:image" content="${finalImage}" />\n`;
+                seoTags += `    <meta name="twitter:image" content="${finalImageWithBuster}" />\n`;
             }
 
             if (logo) {
