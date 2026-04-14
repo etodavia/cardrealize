@@ -131,21 +131,30 @@ app.get('/', async (req, res) => {
         }
 
         const data = await getCardDataInternal();
+        const protocol = req.protocol;
+        const host = req.get('host');
+        const baseUrl = `${protocol}://${host}`;
         
         if (data && data.seo) {
             console.log(`[SSR] Injetando SEO para: ${data.seo.title}`);
-            const title = data.seo.title || 'Cartão Digital';
-            const desc = data.seo.description || 'Conheça nossos serviços';
-            const imageUrl = data.seo.image || '';
-            const logo = (data.header && data.header.logoUrl) ? data.header.logoUrl : '';
+            const title = data.seo.title || 'Benaso Soluções - Benhur Araújo';
+            const desc = data.seo.description || 'Clique no link abaixo para abrir meu cartão digital.';
+            let imageUrl = data.seo.image || '';
+            let logo = (data.header && data.header.logoUrl) ? data.header.logoUrl : '';
+
+            // Ensure URLs are absolute for Facebook/WhatsApp
+            if (imageUrl && imageUrl.startsWith('/')) imageUrl = baseUrl + imageUrl;
+            if (logo && logo.startsWith('/')) logo = baseUrl + logo;
             
-            // 1. Remove existing title and meta tags to avoid duplication
+            // 1. Remove ANY existing SEO tags to start clean
             html = html.replace(/<title[^>]*>[\s\S]*?<\/title>/gi, '');
             html = html.replace(/<meta[^>]*name=["']description["'][^>]*>/gi, '');
             html = html.replace(/<meta[^>]*property=["']og:title["'][^>]*>/gi, '');
             html = html.replace(/<meta[^>]*property=["']og:description["'][^>]*>/gi, '');
             html = html.replace(/<meta[^>]*property=["']og:image["'][^>]*>/gi, '');
+            html = html.replace(/<meta[^>]*property=["']og:image:secure_url["'][^>]*>/gi, '');
             html = html.replace(/<meta[^>]*property=["']og:type["'][^>]*>/gi, '');
+            html = html.replace(/<meta[^>]*name=["']twitter:card["'][^>]*>/gi, '');
             html = html.replace(/<meta[^>]*name=["']twitter:image["'][^>]*>/gi, '');
 
             // 2. Prepare new SEO tags
@@ -155,25 +164,25 @@ app.get('/', async (req, res) => {
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${desc}" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="${baseUrl}${req.url}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${title}" />
     <meta name="twitter:description" content="${desc}" />
 `;
-            if (imageUrl) {
-                seoTags += `    <meta property="og:image" content="${imageUrl}" />\n`;
-                seoTags += `    <meta property="og:image:secure_url" content="${imageUrl}" />\n`;
-                seoTags += `    <meta property="og:image:type" content="image/png" />\n`;
+            
+            // Final fallback image if everything is empty
+            const finalImage = imageUrl || logo;
+
+            if (finalImage) {
+                seoTags += `    <meta property="og:image" content="${finalImage}" />\n`;
+                seoTags += `    <meta property="og:image:secure_url" content="${finalImage}" />\n`;
                 seoTags += `    <meta property="og:image:width" content="1200" />\n`;
                 seoTags += `    <meta property="og:image:height" content="630" />\n`;
-                seoTags += `    <meta name="twitter:image" content="${imageUrl}" />\n`;
+                seoTags += `    <meta name="twitter:image" content="${finalImage}" />\n`;
             }
+
             if (logo) {
                 seoTags += `    <link rel="icon" type="image/png" href="${logo}" />\n`;
-                if (!imageUrl) {
-                    seoTags += `    <meta property="og:image" content="${logo}" />\n`;
-                    seoTags += `    <meta property="og:image:secure_url" content="${logo}" />\n`;
-                    seoTags += `    <meta name="twitter:image" content="${logo}" />\n`;
-                }
             }
 
             // 3. Inject right after <head>
