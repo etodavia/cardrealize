@@ -121,18 +121,22 @@ app.get('/', async (req, res) => {
         const data = await getCardDataInternal();
         let htmlPath = path.join(__dirname, 'dist', 'index.html');
         
-        // Fallback for local development if dist doesn't exist
-        if (!fs.existsSync(htmlPath)) {
-            htmlPath = path.join(__dirname, 'index.html');
+        let html;
+        const distPath = path.join(__dirname, 'dist', 'index.html');
+        const rootPath = path.join(__dirname, 'index.html');
+
+        if (fs.existsSync(distPath)) {
+            html = fs.readFileSync(distPath, 'utf8');
+        } else if (fs.existsSync(rootPath)) {
+            html = fs.readFileSync(rootPath, 'utf8');
+        } else {
+            return res.status(404).send('index.html not found');
         }
 
-        if (!fs.existsSync(htmlPath)) {
-            return res.status(404).send("Index não encontrado");
-        }
-
-        let html = fs.readFileSync(htmlPath, 'utf8');
-
+        const data = await getCardData();
+        
         if (data && data.seo) {
+            console.log(`[SSR] Injetando SEO para: ${data.seo.title}`);
             const title = data.seo.title || 'Cartão Digital';
             const desc = data.seo.description || 'Conheça nossos serviços';
             const imageUrl = data.seo.image || '';
@@ -145,6 +149,7 @@ app.get('/', async (req, res) => {
             html = html.replace(/<meta[^>]*property=["']og:description["'][^>]*>/gi, '');
             html = html.replace(/<meta[^>]*property=["']og:image["'][^>]*>/gi, '');
             html = html.replace(/<meta[^>]*property=["']og:type["'][^>]*>/gi, '');
+            html = html.replace(/<meta[^>]*name=["']twitter:image["'][^>]*>/gi, '');
 
             // 2. Prepare new SEO tags
             let seoTags = `
@@ -153,6 +158,7 @@ app.get('/', async (req, res) => {
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${desc}" />
     <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
 `;
             if (imageUrl) {
                 seoTags += `    <meta property="og:image" content="${imageUrl}" />\n`;
@@ -160,22 +166,21 @@ app.get('/', async (req, res) => {
             }
             if (logo) {
                 seoTags += `    <link rel="icon" type="image/png" href="${logo}" />\n`;
-                // If no SEO image, use logo as fallback for OG
                 if (!imageUrl) {
                     seoTags += `    <meta property="og:image" content="${logo}" />\n`;
                 }
             }
 
-            // 3. Inject right after <head> or at the beginning of Head
+            // 3. Inject right after <head>
             if (html.includes('<head>')) {
                 html = html.replace('<head>', `<head>\n${seoTags}`);
             }
         }
 
         res.send(html);
-    } catch (e) {
-        console.error("Erro SSR:", e);
-        res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    } catch (error) {
+        console.error('SSR Error:', error);
+        res.status(500).send('Internal Server Error');
     }
 });
 
