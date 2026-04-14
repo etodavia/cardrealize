@@ -156,15 +156,23 @@ app.get('/', async (req, res) => {
     <meta property="og:description" content="${desc}" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${title}" />
+    <meta name="twitter:description" content="${desc}" />
 `;
             if (imageUrl) {
                 seoTags += `    <meta property="og:image" content="${imageUrl}" />\n`;
+                seoTags += `    <meta property="og:image:secure_url" content="${imageUrl}" />\n`;
+                seoTags += `    <meta property="og:image:type" content="image/png" />\n`;
+                seoTags += `    <meta property="og:image:width" content="1200" />\n`;
+                seoTags += `    <meta property="og:image:height" content="630" />\n`;
                 seoTags += `    <meta name="twitter:image" content="${imageUrl}" />\n`;
             }
             if (logo) {
                 seoTags += `    <link rel="icon" type="image/png" href="${logo}" />\n`;
                 if (!imageUrl) {
                     seoTags += `    <meta property="og:image" content="${logo}" />\n`;
+                    seoTags += `    <meta property="og:image:secure_url" content="${logo}" />\n`;
+                    seoTags += `    <meta name="twitter:image" content="${logo}" />\n`;
                 }
             }
 
