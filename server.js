@@ -115,12 +115,9 @@ async function getCardDataInternal() {
     return null;
 }
 
-// Special route for root to inject SEO tags (SSR Lite)
+// Serving the main page with dynamic SEO injection (SSR Lite)
 app.get('/', async (req, res) => {
     try {
-        const data = await getCardDataInternal();
-        let htmlPath = path.join(__dirname, 'dist', 'index.html');
-        
         let html;
         const distPath = path.join(__dirname, 'dist', 'index.html');
         const rootPath = path.join(__dirname, 'index.html');
@@ -133,7 +130,7 @@ app.get('/', async (req, res) => {
             return res.status(404).send('index.html not found');
         }
 
-        const data = await getCardData();
+        const data = await getCardDataInternal();
         
         if (data && data.seo) {
             console.log(`[SSR] Injetando SEO para: ${data.seo.title}`);
