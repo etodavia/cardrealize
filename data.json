@@ -3,7 +3,7 @@
   "header": {
     "logoUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776121683619_logo%2001.png?alt=media&token=d3322af6-993d-467c-9a85-05801cf895b2",
     "tagline": "",
-    "topQrCodeUrl": "/assets/qr-top.png"
+    "topQrCodeUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1778155334856_adobe-express-dynamic-qr-code.png?alt=media&token=2238fbf3-dbd1-4a88-b320-3ccfc8eeaa63"
   },
   "backgrounds": {
     "mobileUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776100159401_fundocel.png?alt=media&token=2fa3d552-d4ca-4f2e-b15c-fcf5b81e6884",
@@ -45,7 +45,7 @@
   "reviewBlock": {
     "title": "Avalie nossa Empresa",
     "subtext": "sua opinião é importante para nós!",
-    "qrCodeUrl": "/assets/qr-review.png"
+    "qrCodeUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1778155389297_adobe-express-dynamic-qr-code.png?alt=media&token=eacdcb4a-a37c-4a8a-ae7c-2ec74db321b4"
   },
   "products": {
     "sectionTitle": "Serviços da Agência",
@@ -77,7 +77,8 @@
   },
   "seo": {
     "title": "Benhur Araújo ",
-    "description": "Equipamentos, mobiliário e soluções profissionais\ncom qualidade, durabilidade e alto desempenho.\n"
+    "description": "Equipamentos, mobiliário e soluções profissionais\ncom qualidade, durabilidade e alto desempenho.\n",
+    "image": ""
   },
   "tracking": {
     "fbPixel": "",

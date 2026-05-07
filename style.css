@@ -69,15 +69,16 @@ body {
 
 .modal-content {
   background: white;
-  padding: 2vh;
-  border-radius: 12px;
+  padding: 10px;
+  border-radius: 8px;
   text-align: center;
   position: relative;
-  color: #333;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transform: translateY(20px);
-  max-height: 90vh;
-  max-width: 90vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  max-height: 80vh;
+  max-width: 85vw;
 }
 
 .close-modal {
@@ -99,11 +100,12 @@ body {
 }
 
 .modal-qr {
-  width: 40vh;
-  max-width: 250px;
+  width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: 80vh;
   object-fit: contain;
-  margin-bottom: 5px;
+  display: block;
 }
 
 /* Main Layout Grid */
@@ -160,7 +162,7 @@ body {
   border-radius: 4px;
   padding: 4px;
   object-fit: contain;
-  background: white; /* Give it a solid white background to ensure the square border looks correct */
+  background: transparent; 
 }
 
 .content-column {
@@ -409,14 +411,10 @@ body {
 }
 
 .review-qr {
-  width: 8vh;
-  height: 8vh;
-  min-width: 60px;
-  min-height: 60px;
-  border: 2px solid white;
-  border-radius: 4px;
-  aspect-ratio: 1/1;
+  width: 100px;
+  height: auto;
   object-fit: contain;
+  display: block;
 }
 
 .review-subtext {
@@ -688,8 +686,8 @@ body {
 
   .top-qr-block {
     position: absolute;
-    left: 10px;
-    top: 0px; /* Extreme top */
+    left: 15px;
+    top: 20px; /* More padding from top */
     z-index: 100;
     align-items: center;
     display: flex;
