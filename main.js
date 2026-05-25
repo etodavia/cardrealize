@@ -1,5 +1,4 @@
 import './style.css'
-import { getCardData } from './firebase.js';
 
 console.log("Responsive Digital Card Initialized");
 
@@ -10,7 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchDataAndRender() {
     try {
-        const data = await loadCardData();
+        const response = await fetch('/api/card');
+        if (!response.ok) throw new Error('Nao foi possivel carregar /api/card.');
+        const data = await response.json();
         
         if (!data) throw new Error('Banco de dados vazio ou inacessível.');
         populateUI(data);
@@ -33,15 +34,6 @@ async function fetchDataAndRender() {
         console.error("Failed to load data:", error);
         document.getElementById('loader').innerHTML = '<p style="color:white; text-align:center; padding: 20px;">Nao foi possivel carregar os dados do card.</p>';
     }
-}
-
-async function loadCardData() {
-    const firebaseData = await getCardData();
-    if (firebaseData) return firebaseData;
-
-    const response = await fetch('/api/card');
-    if (!response.ok) throw new Error('Nao foi possivel carregar /api/card.');
-    return response.json();
 }
 
 function applyResponsiveBackground(bgs) {
