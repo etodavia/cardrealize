@@ -1,6 +1,11 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "functions": {
+    "api/card.js": {
+      "includeFiles": "data.json"
+    }
+  },
   "rewrites": [
     {
       "source": "/admin",
