@@ -1,5 +1,5 @@
 // admin.js - Versão Carrossel 12 Itens
-import { uploadImageToStorage } from './firebase.js';
+import { getCardData, saveCardData, uploadImageToStorage } from './firebase.js';
 
 let _fullData = null;
 
@@ -16,8 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadData() {
     try {
-        const response = await fetch('/api/card');
-        const data = await response.json();
+        const data = await loadCardData();
         _fullData = data;
 
         const setVal = (id, val) => {
@@ -111,6 +110,15 @@ async function loadData() {
     } catch (e) { console.error(e); }
 }
 
+async function loadCardData() {
+    const firebaseData = await getCardData();
+    if (firebaseData) return firebaseData;
+
+    const response = await fetch('/api/card');
+    if (!response.ok) throw new Error('Nao foi possivel carregar os dados do card.');
+    return response.json();
+}
+
 async function saveData() {
     if (!_fullData) return;
     const getVal = (id) => document.getElementById(id)?.value || '';
@@ -175,16 +183,18 @@ async function saveData() {
     _fullData.securityKey = getVal('sec-recovery-key');
 
     try {
-        const response = await fetch('/api/card', {
+        const saved = await saveCardData(_fullData);
+        if (!saved) throw new Error('Falha ao salvar no Firebase.');
+
+        fetch('/api/card', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(_fullData)
-        });
-        if (response.ok) {
-            const toast = document.getElementById('toast');
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 3000);
-        }
+        }).catch(() => {});
+
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 3000);
     } catch (e) { alert("Erro ao salvar."); }
 }
 
@@ -192,8 +202,7 @@ window.checkLogin = async function () {
     const email = document.getElementById('admin-email').value;
     const pwd = document.getElementById('admin-password').value;
     try {
-        const response = await fetch('/api/card');
-        const data = await response.json();
+        const data = await loadCardData();
         if (pwd === data.adminPassword && email.toLowerCase() === data.adminEmail.toLowerCase()) {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('admin-app').style.display = 'flex';
@@ -211,18 +220,13 @@ window.logout = function () {
 
 window.forgotPassword = async function () {
     try {
-        const response = await fetch('/api/card');
-        const data = await response.json();
+        const data = await loadCardData();
         const key = prompt("Digite sua Chave Master:");
         if (key === data.securityKey) {
             const n = prompt("Nova senha:");
             if (n) {
                 data.adminPassword = n;
-                await fetch('/api/card', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+                await saveCardData(data);
                 alert("Senha alterada!");
             }
         }

@@ -10,11 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchDataAndRender() {
     try {
-        const response = await fetch('/api/card');
-
-        const data = await response.json();
+        const data = await loadCardData();
         
-        if (!data) throw new Error('Banco de dados local vazio ou inacessível.');
+        if (!data) throw new Error('Banco de dados vazio ou inacessível.');
         populateUI(data);
         applySEOAndTracking(data);
         applyResponsiveBackground(data.backgrounds);
@@ -33,8 +31,17 @@ async function fetchDataAndRender() {
 
     } catch (error) {
         console.error("Failed to load data:", error);
-        document.getElementById('loader').innerHTML = '<p style="color:white; text-align:center; padding: 20px;">Servidor Local Inativo.<br>Certifique-se de que o backend Node.js está rodando.</p>';
+        document.getElementById('loader').innerHTML = '<p style="color:white; text-align:center; padding: 20px;">Nao foi possivel carregar os dados do card.</p>';
     }
+}
+
+async function loadCardData() {
+    const firebaseData = await getCardData();
+    if (firebaseData) return firebaseData;
+
+    const response = await fetch('/api/card');
+    if (!response.ok) throw new Error('Nao foi possivel carregar /api/card.');
+    return response.json();
 }
 
 function applyResponsiveBackground(bgs) {
