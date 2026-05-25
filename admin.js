@@ -1,5 +1,4 @@
 // admin.js - Versão Carrossel 12 Itens
-import { uploadImageToStorage } from './firebase.js';
 
 let _fullData = null;
 
@@ -240,8 +239,17 @@ window.uploadFile = async function (input, targetId) {
         status.innerText = "⏳ Enviando...";
     }
     try {
-        const path = `uploads/${Date.now()}_${file.name}`;
-        const url = await uploadImageToStorage(file, path);
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch('/api/upload', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) throw new Error('Falha no upload local.');
+
+        const { url } = await response.json();
         document.getElementById(targetId).value = url;
         if (status) {
             status.style.color = '#10b981';

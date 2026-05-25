@@ -1,9 +1,11 @@
 import express from 'express';
 import sqlite3 from 'sqlite3';
+import mysql from 'mysql2/promise';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
+import multer from 'multer';
 
 dotenv.config();
 
@@ -23,9 +25,72 @@ const PORT = process.env.PORT || 3000;
 
 const DB_FILE = process.env.DB_FILE || 'database.sqlite';
 const DATA_FILE = path.join(process.cwd(), 'data.json');
+const UPLOAD_DIR = path.resolve(process.env.UPLOAD_DIR || path.join(process.cwd(), 'uploads'));
+
+fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+
+function safeFileName(name) {
+    const parsed = path.parse(name);
+    const base = parsed.name
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9_-]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 60) || 'arquivo';
+    const ext = parsed.ext.replace(/[^a-zA-Z0-9.]/g, '').toLowerCase();
+    return `${Date.now()}-${Math.round(Math.random() * 1e9)}-${base}${ext}`;
+}
+
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: (_req, _file, cb) => cb(null, UPLOAD_DIR),
+        filename: (_req, file, cb) => cb(null, safeFileName(file.originalname))
+    }),
+    limits: {
+        fileSize: 50 * 1024 * 1024
+    }
+});
 
 let useSQLite = false;
 let dbSQLite = null;
+let dbMaria = null;
+
+const DB_TYPE = (process.env.DB_TYPE || '').toLowerCase();
+const mariaConfig = {
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT || 3306),
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: Number(process.env.DB_CONNECTION_LIMIT || 10),
+    charset: 'utf8mb4'
+};
+
+function shouldUseMariaDB() {
+    return DB_TYPE === 'mariadb' || Boolean(mariaConfig.host && mariaConfig.user && mariaConfig.database);
+}
+
+async function connectMariaDB() {
+    if (!shouldUseMariaDB()) return false;
+
+    try {
+        dbMaria = mysql.createPool(mariaConfig);
+        await dbMaria.query(`
+            CREATE TABLE IF NOT EXISTS cards (
+                id VARCHAR(50) PRIMARY KEY,
+                data LONGTEXT NOT NULL,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+        `);
+        console.log('✅ Conectado com sucesso ao MariaDB!');
+        return true;
+    } catch (error) {
+        console.warn('⚠️ MariaDB não disponível:', error.message);
+        dbMaria = null;
+        return false;
+    }
+}
 
 function connectSQLite() {
     return new Promise((resolve) => {
@@ -44,58 +109,15 @@ function connectSQLite() {
 }
 
 await connectSQLite();
+await connectMariaDB();
 
-// Serve static files from the Vite build directory
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, 'dist')));
-
-app.get('/api/card', async (req, res) => {
-    try {
-        if (useSQLite) {
-            const row = await new Promise((resolve, reject) => {
-                dbSQLite.get('SELECT data FROM cards WHERE id = ?', ['main'], (err, row) => {
-                    if (err) reject(err);
-                    else resolve(row);
-                });
-            });
-            if (row) return res.json(JSON.parse(row.data));
-        }
-        
-        if (fs.existsSync(DATA_FILE)) {
-            const data = fs.readFileSync(DATA_FILE, 'utf-8');
-            return res.json(JSON.parse(data));
-        }
-        res.status(404).json({ message: 'Dados não encontrados' });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-app.post('/api/card', async (req, res) => {
-    try {
-        const data = req.body;
-        if (useSQLite) {
-            await new Promise((resolve, reject) => {
-                dbSQLite.run(
-                    'INSERT INTO cards (id, data) VALUES (?, ?) ON CONFLICT(id) DO UPDATE SET data = ?',
-                    ['main', JSON.stringify(data), JSON.stringify(data)],
-                    (err) => {
-                        if (err) reject(err);
-                        else resolve();
-                    }
-                );
-            });
-        }
-        fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// Helper function to get data for SSR
 async function getCardDataInternal() {
     try {
+        if (dbMaria) {
+            const [rows] = await dbMaria.execute('SELECT data FROM cards WHERE id = ?', ['main']);
+            if (rows[0]) return JSON.parse(rows[0].data);
+        }
+
         if (useSQLite) {
             const row = await new Promise((resolve, reject) => {
                 dbSQLite.get('SELECT data FROM cards WHERE id = ?', ['main'], (err, row) => {
@@ -105,15 +127,85 @@ async function getCardDataInternal() {
             });
             if (row) return JSON.parse(row.data);
         }
+
         if (fs.existsSync(DATA_FILE)) {
             const dataJSON = fs.readFileSync(DATA_FILE, 'utf-8');
             return JSON.parse(dataJSON);
         }
-    } catch (e) {
-        console.error("Erro ao ler dados para SEO:", e);
+    } catch (error) {
+        console.error('Erro ao ler dados do card:', error);
+        throw error;
     }
+
     return null;
 }
+
+async function saveCardDataInternal(data) {
+    const payload = JSON.stringify(data);
+
+    if (dbMaria) {
+        await dbMaria.execute(
+            'INSERT INTO cards (id, data) VALUES (?, ?) ON DUPLICATE KEY UPDATE data = VALUES(data)',
+            ['main', payload]
+        );
+        return;
+    }
+
+    if (useSQLite) {
+        await new Promise((resolve, reject) => {
+            dbSQLite.run(
+                'INSERT INTO cards (id, data) VALUES (?, ?) ON CONFLICT(id) DO UPDATE SET data = ?',
+                ['main', payload, payload],
+                (err) => {
+                    if (err) reject(err);
+                    else resolve();
+                }
+            );
+        });
+        return;
+    }
+
+    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+}
+
+// Serve static files from the Vite build directory
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, 'dist')));
+app.use('/uploads', express.static(UPLOAD_DIR));
+
+app.post('/api/upload', upload.single('file'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
+    }
+
+    res.json({
+        url: `/uploads/${req.file.filename}`,
+        filename: req.file.filename,
+        originalName: req.file.originalname,
+        size: req.file.size
+    });
+});
+
+app.get('/api/card', async (req, res) => {
+    try {
+        const data = await getCardDataInternal();
+        if (data) return res.json(data);
+        res.status(404).json({ message: 'Dados nao encontrados' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/api/card', async (req, res) => {
+    try {
+        const data = req.body;
+        await saveCardDataInternal(data);
+        fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 // Serving the main page with dynamic SEO injection (SSR Lite)
 app.get('/', async (req, res) => {
@@ -232,4 +324,3 @@ try {
     console.error('❌ Não foi possível iniciar o servidor:', e);
     process.exit(1);
 }
-

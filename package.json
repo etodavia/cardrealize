@@ -10,8 +10,6 @@
     "server": "node server.js",
     "start": "node server.js",
     "init-db": "node init_sqlite.js"
-
-
   },
   "devDependencies": {
     "vite": "^7.3.1"
@@ -20,7 +18,8 @@
     "cors": "^2.8.6",
     "dotenv": "^16.4.5",
     "express": "^5.2.1",
-    "firebase": "^12.10.0",
+    "multer": "^2.1.1",
+    "mysql2": "^3.22.3",
     "sqlite3": "^5.1.7"
   }
 }
