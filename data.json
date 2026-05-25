@@ -48,27 +48,31 @@
     "qrCodeUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1778155389297_adobe-express-dynamic-qr-code.png?alt=media&token=eacdcb4a-a37c-4a8a-ae7c-2ec74db321b4"
   },
   "products": {
-    "sectionTitle": "Serviços da Agência",
+    "sectionTitle": "Galeria, Catalogos e Videos",
     "items": [
       {
         "title": "Cozinhas Industriais",
         "imgUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109253168_2148763122.jpg?alt=media&token=e6a18bb4-d3c0-40cd-8730-ff2aa2b1ac9f",
-        "pdfUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109470270_2024-%20SUPERMERCADOS%20-%20LENOX%20COZINHAS.pdf?alt=media&token=ffa69b05-4fa4-471d-a58c-219c99628001"
+        "pdfUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109470270_2024-%20SUPERMERCADOS%20-%20LENOX%20COZINHAS.pdf?alt=media&token=ffa69b05-4fa4-471d-a58c-219c99628001",
+        "videoUrl": ""
       },
       {
-        "title": "Equipamentos Food Service",
-        "imgUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109481892_2148237244.jpg?alt=media&token=bdc20b16-af57-4147-84ef-c42f1c804cea",
-        "pdfUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109492475_CATALOGO%20QUALIS%202025-2026.pdf?alt=media&token=2ce392d9-6861-423d-b75c-0b0afcdc3d7e"
+        "title": "Exemplo de Vídeo",
+        "imgUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1779737076949_cap0147you02.png?alt=media&token=708c53b1-7fa1-45f5-97f8-15e934d0ff6e",
+        "pdfUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109492475_CATALOGO%20QUALIS%202025-2026.pdf?alt=media&token=2ce392d9-6861-423d-b75c-0b0afcdc3d7e",
+        "videoUrl": "https://www.youtube.com/watch?v=WJh6YXt2aK0"
       },
       {
         "title": "Linha Hamburgueria",
         "imgUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109504402_2148006675.jpg?alt=media&token=27422581-ffea-4c7c-a0ae-0c51d89fffd2",
-        "pdfUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109522374_Cata%CC%81logo%20-%20Linha%20Cafeteria%202026.pdf?alt=media&token=7eb4e0d7-57f9-4116-a991-f24c82ae4cdc"
+        "pdfUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776109522374_Cata%CC%81logo%20-%20Linha%20Cafeteria%202026.pdf?alt=media&token=7eb4e0d7-57f9-4116-a991-f24c82ae4cdc",
+        "videoUrl": ""
       },
       {
         "title": "Mobiliário Comercial",
         "imgUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1776110852186_27842.jpg?alt=media&token=084cda0f-edc1-4574-889e-d3f2f14ffb7a",
-        "pdfUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1775850583304_manual.pdf?alt=media&token=77d7429a-09e4-43b0-8d63-f0bcf1cbf9ef"
+        "pdfUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1775850583304_manual.pdf?alt=media&token=77d7429a-09e4-43b0-8d63-f0bcf1cbf9ef",
+        "videoUrl": ""
       }
     ]
   },

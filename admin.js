@@ -73,11 +73,15 @@ async function loadData() {
                             <input type="file" onchange="uploadFile(this, 'prod-${i}-img')" style="font-size:0.7rem; margin-top:5px;">
                             <small id="status-prod-${i}-img" style="display:none;"></small>
                         </div>
-                        <div class="form-group" style="grid-column: span 2;">
+                        <div class="form-group">
                             <label>Arquivo PDF (Download)</label>
                             <input type="text" id="prod-${i}-pdf" value="${item.pdfUrl || ''}">
                             <input type="file" onchange="uploadFile(this, 'prod-${i}-pdf')" style="font-size:0.7rem; margin-top:5px;">
                             <small id="status-prod-${i}-pdf" style="display:none;"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Link do Video</label>
+                            <input type="text" id="prod-${i}-video" value="${item.videoUrl || ''}" placeholder="YouTube, Vimeo, Drive...">
                         </div>
                     </div>
                 `;
@@ -142,8 +146,9 @@ async function saveData() {
         const title = getVal(`prod-${i}-name`);
         const imgUrl = getVal(`prod-${i}-img`);
         const pdfUrl = getVal(`prod-${i}-pdf`);
-        if (title || imgUrl) {
-            _fullData.products.items.push({ title, imgUrl, pdfUrl });
+        const videoUrl = getVal(`prod-${i}-video`);
+        if (title || imgUrl || pdfUrl || videoUrl) {
+            _fullData.products.items.push({ title, imgUrl, pdfUrl, videoUrl });
         }
     }
 

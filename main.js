@@ -62,6 +62,7 @@ function populateUI(data) {
             const logoText = document.getElementById('hdr-logo-text-block');
             if (logoImg) {
                 logoImg.src = data.header.logoUrl;
+                logoImg.classList.add('logo-img');
                 logoImg.style.display = 'block';
                 if (logoText) logoText.style.display = 'none';
 
@@ -90,7 +91,12 @@ function populateUI(data) {
 
     const waUrl = `https://wa.me/${data.profile.whatsappNumber}`;
     document.getElementById('btn-wa').href = waUrl;
-    document.getElementById('txt-wa').innerHTML = data.profile.whatsappText.replace('\n', '<br>');
+    const whatsappText = String(data.profile.whatsappText || '')
+        .split('\n')
+        .map(line => line.trim())
+        .filter(Boolean)
+        .join('<br>');
+    document.getElementById('txt-wa').innerHTML = whatsappText || 'Fale pelo WhatsApp';
 
     // Links (Pills)
     const linksContainer = document.getElementById('links-container');
@@ -102,6 +108,7 @@ function populateUI(data) {
             el.className = `link-pill gsap-link`;
             el.href = link.url;
             el.target = '_blank';
+            el.rel = 'noopener noreferrer';
 
             // Icon mapping from the new 'icon' property in admin
             let colorClass = 'bg-black';
@@ -145,15 +152,15 @@ function populateUI(data) {
     }
 
     // Address & Review
-    document.getElementById('addr-title').textContent = data.addressBlock.title;
+    document.getElementById('addr-title').textContent = data.addressBlock.title || 'Area de destaque';
     document.getElementById('addr-lines').innerHTML = data.addressBlock.lines.replace(/\n/g, '<br>');
 
-    document.getElementById('rev-title').textContent = data.reviewBlock.title;
-    document.getElementById('rev-subtext').textContent = data.reviewBlock.subtext.replace(/\n/g, '<br>');
+    document.getElementById('rev-title').textContent = data.reviewBlock.title || 'Avaliacoes';
+    document.getElementById('rev-subtext').innerHTML = (data.reviewBlock.subtext || '').replace(/\n/g, '<br>');
     document.getElementById('rev-qr').src = data.reviewBlock.qrCodeUrl;
 
     // Products (Carousel with 12 items)
-    document.getElementById('prod-title').textContent = data.products.sectionTitle;
+    document.getElementById('prod-title').textContent = data.products.sectionTitle || 'Galeria e catalogos';
     const prodContainer = document.getElementById('products-container');
     const waNumber = data.profile.whatsappNumber;
     prodContainer.innerHTML = '';
@@ -168,8 +175,9 @@ function populateUI(data) {
                 <img src="${prod.imgUrl}" alt="${prod.title}" class="product-img">
                 <p class="product-title">${prod.title}</p>
                 <div class="prod-btn-row">
-                    ${prod.pdfUrl ? `<a href="${prod.pdfUrl}" target="_blank" class="btn-mini btn-pdf"><i class="fas fa-file-pdf"></i> PDF</a>` : ''}
-                    <a href="https://wa.me/${waNumber}?text=${waMessage}" target="_blank" class="btn-mini btn-zap-mini"><i class="fab fa-whatsapp"></i> ZAP</a>
+                    ${prod.pdfUrl ? `<a href="${prod.pdfUrl}" target="_blank" rel="noopener noreferrer" class="btn-mini btn-pdf"><i class="fas fa-file-pdf"></i> PDF</a>` : ''}
+                    ${prod.videoUrl ? `<a href="${prod.videoUrl}" target="_blank" rel="noopener noreferrer" class="btn-mini btn-video"><i class="fas fa-play"></i> VIDEO</a>` : ''}
+                    <a href="https://wa.me/${waNumber}?text=${waMessage}" target="_blank" rel="noopener noreferrer" class="btn-mini btn-zap-mini"><i class="fab fa-whatsapp"></i> ZAP</a>
                 </div>
             `;
             prodContainer.appendChild(card);
