@@ -665,12 +665,12 @@ body {
   }
 
   .info-layout {
-    margin-top: 8.6vh;
-    gap: 0.85vh;
+    margin-top: 12.15vh;
+    gap: 0.7vh;
   }
 
   .links-column {
-    gap: 0.85vh;
+    gap: 0.7vh;
   }
 
   .header-section {
@@ -739,18 +739,18 @@ body {
     min-height: 0;
     flex-direction: column;
     align-items: stretch;
-    padding: 6px 12px;
+    padding: 5px 12px;
     border-radius: 14px;
-    gap: 6px;
+    gap: 5px;
   }
 
   .address-content h3 {
-    font-size: clamp(0.82rem, 3.45vw, 0.96rem);
+    font-size: clamp(0.78rem, 3.25vw, 0.9rem);
   }
 
   .address-content p {
-    font-size: clamp(0.58rem, 2.5vw, 0.7rem);
-    line-height: 1.1;
+    font-size: clamp(0.55rem, 2.35vw, 0.66rem);
+    line-height: 1.06;
   }
 
   .review-block {
@@ -765,7 +765,7 @@ body {
   }
 
   .review-qr {
-    width: clamp(46px, 13vw, 58px);
+    width: clamp(42px, 12vw, 54px);
   }
 
   .review-subtext {
@@ -779,7 +779,7 @@ body {
   }
 
   .products-section {
-    gap: 0.5vh;
+    gap: 0.35vh;
   }
 
   .products-grid {
@@ -793,7 +793,7 @@ body {
 
   .product-img {
     border-radius: 6px;
-    aspect-ratio: 16/6.4;
+    aspect-ratio: 16/5.7;
   }
 
   .prod-btn-row {
@@ -808,8 +808,8 @@ body {
   }
 
   .product-title {
-    font-size: clamp(0.46rem, 2.05vw, 0.58rem);
-    min-height: 1.8em;
+    font-size: clamp(0.44rem, 1.95vw, 0.55rem);
+    min-height: 1.55em;
     margin-bottom: 2px;
   }
 
