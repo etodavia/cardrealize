@@ -44,11 +44,11 @@
   },
   "reviewBlock": {
     "title": "Avalie nossa Empresa",
-    "subtext": "sua opinião é importante para nós!",
+    "subtext": "Sua opinião é importante para nós!",
     "qrCodeUrl": "https://firebasestorage.googleapis.com/v0/b/carddigitalloth-a0e92.firebasestorage.app/o/uploads%2F1778155389297_adobe-express-dynamic-qr-code.png?alt=media&token=eacdcb4a-a37c-4a8a-ae7c-2ec74db321b4"
   },
   "products": {
-    "sectionTitle": "Galeria, Catalogos e Videos",
+    "sectionTitle": "Galeria, Catálogos e Vídeos",
     "items": [
       {
         "title": "Cozinhas Industriais",

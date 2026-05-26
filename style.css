@@ -660,17 +660,17 @@ body {
   }
 
   .content-column {
-    gap: 0.95vh;
+    gap: 1.15vh;
     justify-content: flex-start;
   }
 
   .info-layout {
-    margin-top: 1.2vh;
-    gap: 0.95vh;
+    margin-top: 3vh;
+    gap: 1.25vh;
   }
 
   .links-column {
-    gap: 1.05vh;
+    gap: 1.25vh;
   }
 
   .header-section {
@@ -739,9 +739,9 @@ body {
     min-height: 0;
     flex-direction: column;
     align-items: stretch;
-    padding: 9px 12px;
+    padding: 8px 12px;
     border-radius: 14px;
-    gap: 7px;
+    gap: 6px;
   }
 
   .address-content h3 {
@@ -779,7 +779,7 @@ body {
   }
 
   .products-section {
-    gap: 0.75vh;
+    gap: 0.65vh;
   }
 
   .products-grid {
@@ -793,7 +793,7 @@ body {
 
   .product-img {
     border-radius: 6px;
-    aspect-ratio: 16/8.5;
+    aspect-ratio: 16/7.8;
   }
 
   .prod-btn-row {

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function fetchDataAndRender() {
     try {
         const response = await fetch('/api/card');
-        if (!response.ok) throw new Error('Nao foi possivel carregar /api/card.');
+        if (!response.ok) throw new Error('Não foi possível carregar /api/card.');
         const data = await response.json();
         
         if (!data) throw new Error('Banco de dados vazio ou inacessível.');
@@ -32,7 +32,7 @@ async function fetchDataAndRender() {
 
     } catch (error) {
         console.error("Failed to load data:", error);
-        document.getElementById('loader').innerHTML = '<p style="color:white; text-align:center; padding: 20px;">Nao foi possivel carregar os dados do card.</p>';
+        document.getElementById('loader').innerHTML = '<p style="color:white; text-align:center; padding: 20px;">Não foi possível carregar os dados do card.</p>';
     }
 }
 
@@ -151,15 +151,15 @@ function populateUI(data) {
     }
 
     // Address & Review
-    document.getElementById('addr-title').textContent = data.addressBlock.title || 'Area de destaque';
+    document.getElementById('addr-title').textContent = data.addressBlock.title || 'Área de destaque';
     document.getElementById('addr-lines').innerHTML = data.addressBlock.lines.replace(/\n/g, '<br>');
 
-    document.getElementById('rev-title').textContent = data.reviewBlock.title || 'Avaliacoes';
+    document.getElementById('rev-title').textContent = data.reviewBlock.title || 'Avaliações';
     document.getElementById('rev-subtext').innerHTML = (data.reviewBlock.subtext || '').replace(/\n/g, '<br>');
     document.getElementById('rev-qr').src = data.reviewBlock.qrCodeUrl;
 
     // Products (Carousel with 12 items)
-    document.getElementById('prod-title').textContent = data.products.sectionTitle || 'Galeria e catalogos';
+    document.getElementById('prod-title').textContent = data.products.sectionTitle || 'Galeria, Catálogos e Vídeos';
     const prodContainer = document.getElementById('products-container');
     const waNumber = data.profile.whatsappNumber;
     prodContainer.innerHTML = '';

@@ -41,6 +41,33 @@ function safeFileName(name) {
     return `${Date.now()}-${Math.round(Math.random() * 1e9)}-${base}${ext}`;
 }
 
+function repairText(value) {
+    if (typeof value !== 'string') return value;
+
+    return value
+        .replaceAll('Galeria, Catalogos e Videos', 'Galeria, Catálogos e Vídeos')
+        .replaceAll('Sua opiniao e importante para nos!', 'Sua opinião é importante para nós!')
+        .replaceAll('Sua opini?o ? importante para n?s!', 'Sua opinião é importante para nós!')
+        .replaceAll('sua opini?o ? importante para n?s!', 'Sua opinião é importante para nós!')
+        .replaceAll('sua opinião é importante para nós!', 'Sua opinião é importante para nós!')
+        .replaceAll('Benhur Ara�jo', 'Benhur Araújo')
+        .replaceAll('REUNI�O', 'REUNIÃO')
+        .replaceAll('mobili�rio', 'mobiliário')
+        .replaceAll('Mobili�rio', 'Mobiliário')
+        .replaceAll('solu��es', 'soluções')
+        .replaceAll('V�deo', 'Vídeo');
+}
+
+function repairCardData(value) {
+    if (Array.isArray(value)) return value.map(repairCardData);
+    if (value && typeof value === 'object') {
+        return Object.fromEntries(
+            Object.entries(value).map(([key, item]) => [key, repairCardData(item)])
+        );
+    }
+    return repairText(value);
+}
+
 const upload = multer({
     storage: multer.diskStorage({
         destination: (_req, _file, cb) => cb(null, UPLOAD_DIR),
@@ -115,7 +142,7 @@ async function getCardDataInternal() {
     try {
         if (dbMaria) {
             const [rows] = await dbMaria.execute('SELECT data FROM cards WHERE id = ?', ['main']);
-            if (rows[0]) return JSON.parse(rows[0].data);
+            if (rows[0]) return repairCardData(JSON.parse(rows[0].data));
         }
 
         if (useSQLite) {
@@ -125,12 +152,12 @@ async function getCardDataInternal() {
                     else resolve(row);
                 });
             });
-            if (row) return JSON.parse(row.data);
+            if (row) return repairCardData(JSON.parse(row.data));
         }
 
         if (fs.existsSync(DATA_FILE)) {
             const dataJSON = fs.readFileSync(DATA_FILE, 'utf-8');
-            return JSON.parse(dataJSON);
+            return repairCardData(JSON.parse(dataJSON));
         }
     } catch (error) {
         console.error('Erro ao ler dados do card:', error);
