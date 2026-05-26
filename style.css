@@ -736,12 +736,12 @@ body {
 
   .address-column {
     max-width: 100%;
-    min-height: 0;
+    min-height: clamp(118px, 14.5vh, 126px);
     flex-direction: column;
     align-items: stretch;
-    padding: 5px 12px;
+    padding: 7px 12px;
     border-radius: 14px;
-    gap: 5px;
+    gap: 6px;
   }
 
   .address-content h3 {
