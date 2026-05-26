@@ -642,22 +642,35 @@ body {
   }
 
   .top-qr-block {
-    margin-top: 4vh;
+    margin-top: 3.3vh;
   }
 
   .top-qr-block img {
-    width: 52px;
-    height: 52px;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    padding: 3px;
   }
 
   .top-qr-block span {
-    font-size: 0.55rem;
-    line-height: 1.05;
+    font-size: 0.46rem;
+    line-height: 1;
+    margin-top: 2px;
   }
 
   .content-column {
-    gap: 0.65vh;
+    gap: 0.95vh;
     justify-content: flex-start;
+  }
+
+  .info-layout {
+    margin-top: 1.2vh;
+    gap: 0.95vh;
+  }
+
+  .links-column {
+    gap: 1.05vh;
   }
 
   .header-section {
@@ -728,7 +741,7 @@ body {
     align-items: stretch;
     padding: 9px 12px;
     border-radius: 14px;
-    gap: 6px;
+    gap: 7px;
   }
 
   .address-content h3 {
@@ -763,6 +776,10 @@ body {
 
   .products-title {
     font-size: clamp(0.72rem, 3.1vw, 0.88rem);
+  }
+
+  .products-section {
+    gap: 0.75vh;
   }
 
   .products-grid {
