@@ -638,7 +638,7 @@ body {
   }
 
   .photo-column {
-    min-height: 19vh;
+    min-height: 18vh;
   }
 
   .top-qr-block {
@@ -660,17 +660,17 @@ body {
   }
 
   .content-column {
-    gap: 1.15vh;
+    gap: 0.9vh;
     justify-content: flex-start;
   }
 
   .info-layout {
-    margin-top: 3vh;
-    gap: 1.25vh;
+    margin-top: 6vh;
+    gap: 1vh;
   }
 
   .links-column {
-    gap: 1.25vh;
+    gap: 1vh;
   }
 
   .header-section {
@@ -721,8 +721,8 @@ body {
   }
 
   .link-pill {
-    height: 38px;
-    min-height: 38px;
+    height: 36px;
+    min-height: 36px;
   }
 
   .link-icon {
@@ -739,7 +739,7 @@ body {
     min-height: 0;
     flex-direction: column;
     align-items: stretch;
-    padding: 8px 12px;
+    padding: 7px 12px;
     border-radius: 14px;
     gap: 6px;
   }
@@ -749,8 +749,8 @@ body {
   }
 
   .address-content p {
-    font-size: clamp(0.64rem, 2.8vw, 0.78rem);
-    line-height: 1.18;
+    font-size: clamp(0.61rem, 2.65vw, 0.74rem);
+    line-height: 1.14;
   }
 
   .review-block {
@@ -765,7 +765,7 @@ body {
   }
 
   .review-qr {
-    width: clamp(54px, 15vw, 66px);
+    width: clamp(50px, 14vw, 62px);
   }
 
   .review-subtext {
@@ -775,7 +775,7 @@ body {
   }
 
   .products-title {
-    font-size: clamp(0.72rem, 3.1vw, 0.88rem);
+    font-size: clamp(0.68rem, 3vw, 0.84rem);
   }
 
   .products-section {
@@ -783,17 +783,17 @@ body {
   }
 
   .products-grid {
-    gap: 10px;
+    gap: 8px;
     max-width: 100%;
   }
 
   .product-card {
-    flex-basis: calc(50% - 5px);
+    flex-basis: calc(50% - 4px);
   }
 
   .product-img {
     border-radius: 6px;
-    aspect-ratio: 16/7.8;
+    aspect-ratio: 16/7.1;
   }
 
   .prod-btn-row {
@@ -808,8 +808,8 @@ body {
   }
 
   .product-title {
-    font-size: clamp(0.5rem, 2.3vw, 0.66rem);
-    min-height: 2.2em;
+    font-size: clamp(0.48rem, 2.2vw, 0.62rem);
+    min-height: 2em;
     margin-bottom: 2px;
   }
 

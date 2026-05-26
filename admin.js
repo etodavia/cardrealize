@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function loadData() {
     try {
         const response = await fetch('/api/card');
-        if (!response.ok) throw new Error('Nao foi possivel carregar os dados do card.');
+        if (!response.ok) throw new Error('Não foi possível carregar os dados do card.');
         const data = await response.json();
         _fullData = data;
 

@@ -21,7 +21,7 @@ export default function handler(req, res) {
 
     if (req.method !== 'GET') {
         return res.status(405).json({
-            error: 'Metodo nao permitido no deploy estatico da Vercel.'
+            error: 'Método não permitido no deploy estático da Vercel.'
         });
     }
 
@@ -29,7 +29,7 @@ export default function handler(req, res) {
         return res.status(200).json(readCardData());
     } catch (error) {
         return res.status(500).json({
-            error: 'Nao foi possivel carregar os dados do card.',
+            error: 'Não foi possível carregar os dados do card.',
             detail: error.message
         });
     }

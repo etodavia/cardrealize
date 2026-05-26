@@ -44,7 +44,27 @@ function safeFileName(name) {
 function repairText(value) {
     if (typeof value !== 'string') return value;
 
-    return value
+    let text = value;
+
+    if (/[ÃÂ]/.test(text)) {
+        try {
+            text = Buffer.from(text, 'latin1').toString('utf8');
+        } catch {
+            text = value;
+        }
+    }
+
+    return text
+        .replaceAll('SoluÃ§Ãµes', 'Soluções')
+        .replaceAll('AraÃºjo', 'Araújo')
+        .replaceAll('REUNIÃƒO', 'REUNIÃO')
+        .replaceAll('REUNIÃÃO', 'REUNIÃO')
+        .replaceAll('mobiliÃ¡rio', 'mobiliário')
+        .replaceAll('soluÃ§Ãµes', 'soluções')
+        .replaceAll('opiniÃ£o', 'opinião')
+        .replaceAll('nÃ³s', 'nós')
+        .replaceAll('CatÃ¡logos', 'Catálogos')
+        .replaceAll('VÃ­deos', 'Vídeos')
         .replaceAll('Galeria, Catalogos e Videos', 'Galeria, Catálogos e Vídeos')
         .replaceAll('Sua opiniao e importante para nos!', 'Sua opinião é importante para nós!')
         .replaceAll('Sua opini?o ? importante para n?s!', 'Sua opinião é importante para nós!')
@@ -217,7 +237,7 @@ app.get('/api/card', async (req, res) => {
     try {
         const data = await getCardDataInternal();
         if (data) return res.json(data);
-        res.status(404).json({ message: 'Dados nao encontrados' });
+        res.status(404).json({ message: 'Dados não encontrados' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
