@@ -451,8 +451,9 @@ body {
 }
 
 .review-qr {
-  width: clamp(58px, 8vh, 86px);
+  width: clamp(74px, 10vh, 104px);
   height: auto;
+  aspect-ratio: 1/1;
   object-fit: contain;
   display: block;
   flex: 0 0 auto;
@@ -546,7 +547,7 @@ body {
 
 .product-img {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -745,12 +746,12 @@ body {
   }
 
   .address-content h3 {
-    font-size: clamp(0.78rem, 3.25vw, 0.9rem);
+    font-size: clamp(0.92rem, 3.9vw, 1.08rem);
   }
 
   .address-content p {
-    font-size: clamp(0.55rem, 2.35vw, 0.66rem);
-    line-height: 1.06;
+    font-size: clamp(0.66rem, 2.8vw, 0.8rem);
+    line-height: 1.16;
   }
 
   .review-block {
@@ -761,16 +762,17 @@ body {
   .review-layout {
     flex-direction: row;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
   }
 
   .review-qr {
-    width: clamp(42px, 12vw, 54px);
+    width: clamp(64px, 18vw, 82px);
   }
 
   .review-subtext {
-    font-size: 0.47rem;
-    max-width: 110px;
+    font-size: clamp(0.62rem, 2.75vw, 0.78rem);
+    line-height: 1.18;
+    max-width: 150px;
     text-align: center;
   }
 
@@ -793,7 +795,7 @@ body {
 
   .product-img {
     border-radius: 6px;
-    aspect-ratio: 16/5.7;
+    aspect-ratio: 1/1;
   }
 
   .prod-btn-row {
@@ -1033,6 +1035,6 @@ body {
   }
 
   .product-img {
-    aspect-ratio: 16/7.4;
+    aspect-ratio: 1/1;
   }
 }

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual do Usuário - LOTH Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff6b00; /* Alaranjado LOTH */
+            --dark: #000000;
+            --white: #ffffff;
+            --gray: #f4f4f4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: #fff; color: #333; line-height: 1.6; }
+
+        /* Estilo para impressão */
+        @media print {
+            .no-print { display: none; }
+            body { padding: 0; }
+            .page-break { page-break-before: always; }
+        }
+
+        header {
+            background: var(--dark);
+            color: var(--white);
+            padding: 60px 40px;
+            text-align: center;
+            border-bottom: 8px solid var(--primary);
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            max-width: 250px;
+        }
+
+        .header-detail {
+            height: 4px;
+            background: var(--primary);
+            width: 100px;
+            margin: 20px auto;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px 40px;
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
+        h2 { 
+            color: var(--dark); 
+            font-size: 1.5rem; 
+            margin-top: 40px; 
+            margin-bottom: 20px; 
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+        }
+
+        p { margin-bottom: 15px; font-size: 1.1rem; }
+
+        .feature-card {
+            background: var(--gray);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            border-right: 4px solid var(--primary);
+        }
+
+        .feature-card i {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .step-list {
+            list-style: none;
+            counter-reset: my-awesome-counter;
+        }
+
+        .step-list li {
+            counter-increment: my-awesome-counter;
+            margin: 15px 0;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .step-list li::before {
+            content: counter(my-awesome-counter);
+            background: var(--primary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-weight: 800;
+        }
+
+        .footer-note {
+            margin-top: 100px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .btn-print {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(255,107,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="btn-print no-print" onclick="window.print()">
+        <i class="fas fa-file-pdf"></i> GERAR PDF AGORA
+    </button>
+
+    <header>
+        <div class="logo-container">
+            <img src="loth01branca.png" alt="LOTH Digital">
+        </div>
+        <h1>MANUAL DO USUÁRIO</h1>
+        <p>Gestão de Cartão Digital Estratégico</p>
+        <div class="header-detail"></div>
+    </header>
+
+    <div class="container">
+        <h2>1. Acesso Seguro e Painel</h2>
+        <p>O seu novo painel administrativo foi desenhado para ser intuitivo e seguro. Para acessar, utilize suas credenciais na tela de login de alto contraste.</p>
+        
+        <div class="feature-card">
+            <i class="fas fa-key"></i>
+            <strong>Chave de Recuperação Master:</strong> Definida na aba "Segurança". Se você esquecer sua senha, use esta chave secreta para definir uma nova senha instantaneamente. Nunca compartilhe sua chave Master.
+        </div>
+
+        <h2>2. Carrossel de Serviços (Novidade)</h2>
+        <p>Agora você pode exibir até 12 serviços em um carrossel dinâmico que mantém o layout elegante de 3 colunas em todos os dispositivos.</p>
+        
+        <ul class="step-list">
+            <li><strong>Subir Foto:</strong> Clique em "Escolher arquivo" no campo Foto. O sistema mostrará "Enviando" e confirmará com um check verde.</li>
+            <li><strong>Subir PDF:</strong> Faça o mesmo no campo de PDF. Isso criará um botão de download automático para seus clientes.</li>
+            <li><strong>Botão ZAP:</strong> O sistema gera um link inteligente de WhatsApp para cada item. Quando o cliente clica, você recebe a mensagem exata de qual serviço ele tem interesse.</li>
+        </ul>
+
+        <h2>3. Personalização de Links</h2>
+        <p>Você tem total controle sobre os 3 botões principais de contato:</p>
+        <div class="feature-card">
+            <p>• <strong>Ícones:</strong> Altere a rede social no menu suspenso.</p>
+            <p>• <strong>Cores:</strong> O sistema aplica a cor oficial da rede automaticamente, mas você pode escolher uma cor personalizada para a "ponta" (círculo do ícone) se desejar.</p>
+        </div>
+
+        <div class="page-break"></div>
+
+        <h2>4. Identidade e SEO</h2>
+        <p>Para manter sua marca sempre forte:</p>
+        <ul class="step-list">
+            <li><strong>Logo:</strong> Recomendamos o uso de logos em formato PNG transparente.</li>
+            <li><strong>Backgrounds:</strong> Você pode carregar um fundo diferente para Mobile, Tablet e Desktop para que o encaixe seja sempre perfeito.</li>
+            <li><strong>SEO:</strong> Defina o título e a descrição que aparecerão quando você compartilhar seu link no Google ou WhatsApp.</li>
+        </ul>
+
+        <div class="footer-note">
+            <p>Este manual é propriedade de LOTH Digital.</p>
+            <p>© 2026 LOTH - Todos os direitos reservados.</p>
+        </div>
+    </div>
+
+</body>
+</html>

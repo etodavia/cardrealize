@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="seo-title">Benaso Soluções - Benhur Araújo</title>
+    <meta name="description" id="seo-description" content="Clique no link abaixo para abrir meu cartão digital.">
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="6o9k7nSpa5Mr2BIUGt07B0izHqbM2Q8qdeCFSBUq16U" />
+    <!-- OpenGraph (WhatsApp, Facebook, etc) -->
+    <meta property="og:title" id="og-title" content="Benaso Soluções - Benhur Araújo" />
+    <meta property="og:description" id="og-description"
+        content="Clique no link abaixo para abrir meu cartão digital." />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:type" content="website" />
+
+    <!-- Tracking Head -->
+    <div id="tracking-head"></div>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Outfit:wght@400;700;900&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body id="body-bg">
+    <!-- Tracking Body -->
+    <div id="tracking-body"></div>
+
+    <!-- QR Code Modal (Popup) -->
+    <div id="qr-modal" class="modal-overlay">
+        <div class="modal-content gsap-modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <img id="modal-qr-img" src="" alt="QR Code" class="modal-qr">
+        </div>
+    </div>
+
+    <!-- Full-screen loader -->
+    <div id="loader" class="loader-overlay">
+        <i class="fas fa-circle-notch fa-spin"></i>
+    </div>
+
+    <div id="app" class="app-container" style="opacity: 0;">
+        <div class="layout-grid">
+
+            <!-- Left Column: Empty space for background / Top QR (Anchored left/bottom on desktop, top on mobile) -->
+            <div class="photo-column">
+                <!-- QR Code Block -->
+                <div class="top-qr-block gsap-stagger-top" id="open-qr-modal">
+                    <img id="hdr-topQr" src="/assets/qr-top.png" alt="QR Code">
+                    <span>QR CODE<br>CLIQUE AQUI</span>
+                </div>
+            </div>
+
+            <!-- Right Column: Content -->
+            <div class="content-column">
+
+                <!-- Header: Logo & Name -->
+                <header class="header-section">
+                    <div class="logo-block gsap-stagger-top">
+                        <img id="hdr-logo-img" src="" alt="Logo" style="display:none; max-width: 150px;">
+                        <div id="hdr-logo-text-block">
+                            <h2 class="finance-logo-text"><i class="fas fa-chart-line"></i> <span
+                                    id="hdr-logo-text-main">FINANCE LOGO</span></h2>
+                            <p id="hdr-tagline" class="tagline"></p>
+                        </div>
+                    </div>
+
+                    <div class="name-block gsap-stagger-top">
+                        <h1 id="prof-name" class="script-name"></h1>
+                        <p id="prof-title" class="prof-title"></p>
+                    </div>
+
+                    <div class="whatsapp-block gsap-stagger-top">
+                        <a id="btn-wa" href="#" class="wa-button">
+                            <div class="wa-icon"><i class="fab fa-whatsapp"></i></div>
+                            <span id="txt-wa" class="wa-text"></span>
+                        </a>
+                    </div>
+                </header>
+
+                <!-- Links & Address Layout -->
+                <div class="info-layout">
+
+                    <!-- Left: Links (Pills) -->
+                    <div class="links-column" id="links-container">
+                        <!-- Links populated by JS -->
+                    </div>
+
+                    <!-- Right: Address & Review QR -->
+                    <div class="address-column gsap-stagger-info">
+                        <div class="address-badge">
+                            <div class="address-content">
+                                <h3 id="addr-title"></h3>
+                                <p id="addr-lines"></p>
+                            </div>
+                        </div>
+
+                        <div class="review-block">
+                            <h3 id="rev-title"></h3>
+                            <div class="review-layout">
+                                <img id="rev-qr" src="/assets/qr-review.png" alt="Avaliação" class="review-qr">
+                                <div id="rev-subtext" class="review-subtext">Escaneie para<br>avaliar no Google</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer: Products -->
+                <section class="products-section gsap-stagger-info">
+                    <h2 id="prod-title" class="products-title"></h2>
+                    <div class="carousel-container">
+                        <button id="prev-btn" class="carousel-arrow prev"><i class="fas fa-chevron-left"></i></button>
+                        <div class="products-grid" id="products-container">
+                            <!-- Products populated by JS -->
+                        </div>
+                        <button id="next-btn" class="carousel-arrow next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </section>
+
+                <footer class="bottom-footer gsap-stagger-info">
+                    <p id="footer-text"></p>
+                    <a href="/admin.html" class="admin-link">Área Restrita</a>
+                </footer>
+
+            </div> <!-- Content Column -->
+        </div> <!-- Layout Grid -->
+    </div> <!-- App -->
+
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>
