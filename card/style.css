@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --teal-dark: #232630;
   --teal-medium: #3b5a68;
   --blue-accent: #0f7bb0;
@@ -505,7 +505,7 @@ body {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Sombra no ícone para visibilidade */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Sombra no Ã­cone para visibilidade */
 }
 
 .carousel-arrow:hover {
@@ -1020,4 +1020,10 @@ body {
   .product-img {
     aspect-ratio: 1/1;
   }
+
+  .product-card {
+    flex: 0 0 calc(25% - 1.125vw);
+  }
 }
+
+
